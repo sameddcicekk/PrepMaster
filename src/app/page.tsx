@@ -104,20 +104,34 @@ export default function Home() {
   };
 
   const suggestRecipe = async () => {
-    const available = items.filter(i => i.quantity > 0).map(i => i.name).join(", ");
-    if (!available) { alert("Mutfak boş kanka!"); return; }
-    setIsRecipeLoading(true);
-    try {
-      const response = await fetch("/api/recipe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ingredients: available }),
-      });
-      const data = await response.json();
-      if (data.recipe) { setRecipe(data.recipe); setIsRecipeModalOpen(true); }
-    } catch (error: any) { alert("Hata: " + error.message); } finally { setIsRecipeLoading(false); }
-  };
-
+  const available = items.filter(i => i.quantity > 0).map(i => i.name).join(", ");
+  if (!available) { alert("Mutfak boş kanka!"); return; }
+  
+  setIsRecipeLoading(true);
+  try {
+    const response = await fetch("/api/recipe", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ingredients: available }),
+    });
+    
+    const data = await response.json();
+    
+    // BURASI KRİTİK: Eğer 'recipe' varsa tarif göster, yoksa 'error'u göster
+    if (data.recipe) { 
+      setRecipe(data.recipe); 
+      setIsRecipeModalOpen(true); 
+    } else if (data.error) {
+      alert("Sunucu Hatası: " + data.error);
+    } else {
+      alert("Beklenmedik bir hata oluştu kanka.");
+    }
+  } catch (error: any) { 
+    alert("Bağlantı Hatası: " + error.message); 
+  } finally { 
+    setIsRecipeLoading(false); 
+  }
+};
   if (loading) return <div className="min-h-screen bg-[#020617] flex items-center justify-center text-blue-500 font-black italic">PREPMASTER YÜKLENİYOR...</div>;
 
   if (!user) {
