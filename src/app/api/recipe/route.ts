@@ -5,37 +5,36 @@ export async function POST(req: Request) {
     const { ingredients } = await req.json();
     const apiKey = process.env.GROQ_API_KEY;
 
+    // Hata Ayıklama: Anahtar var mı yok mu kontrol edip ekrana basalım
     if (!apiKey) {
-      return NextResponse.json({ error: "API anahtarı bulunamadı." }, { status: 500 });
+      return NextResponse.json({ recipe: "HATA: Vercel'de GROQ_API_KEY bulunamadı! Lütfen Environment Variables kısmını kontrol et." });
     }
 
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${apiKey}`,
+        "Authorization": `Bearer ${apiKey.trim()}`, // Boşluk varsa temizler
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         model: "llama-3.3-70b-versatile",
         messages: [
-          {
-            role: "system",
-            content: "Sen profesyonel bir şefsin. Kullanıcının elindeki malzemelerle yapılabilecek, yaratıcı, kısa ve iştah açıcı bir yemek tarifi ver. Yanıtın sadece tarif başlığı ve yapılış adımları olsun. Samimi ve enerjik bir dil kullan.",
-          },
-          {
-            role: "user",
-            content: `Elimdeki malzemeler şunlar: ${ingredients}. Bana bu akşam için ne pişirebileceğimi söyle.`,
-          },
+          { role: "system", content: "Sen samimi bir şefsin. Kısa bir tarif ver." },
+          { role: "user", content: `Malzemeler: ${ingredients}` }
         ],
       }),
     });
 
     const data = await response.json();
-    const recipe = data.choices[0]?.message?.content || "Üzgünüm kanka, şu an bir tarif oluşturamadım.";
 
+    if (data.error) {
+      return NextResponse.json({ recipe: `Groq API Hatası: ${data.error.message}` });
+    }
+
+    const recipe = data.choices?.[0]?.message?.content || "Tarif alınamadı kanka.";
     return NextResponse.json({ recipe });
+
   } catch (error: any) {
-    console.error("AI Error:", error);
-    return NextResponse.json({ error: "Bir hata oluştu." }, { status: 500 });
+    return NextResponse.json({ recipe: `Sistem Hatası: ${error.message}` });
   }
 }
