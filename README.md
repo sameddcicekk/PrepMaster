@@ -1,13 +1,15 @@
 # PrepMaster 🍽️
 
-PrepMaster, kullanıcıların yapay zeka desteğiyle yemek tarifleri ve hazırlık süreçlerini yönetmelerini sağlayan modern bir web uygulamasıdır. Gelişmiş AI entegrasyonu sayesinde kişiselleştirilmiş tarif önerileri sunar ve kullanıcı dostu arayüzüyle mutfak deneyimini bir üst seviyeye taşır.
+PrepMaster, kullanıcıların hem mutfak stoklarını akıllıca yönetmelerini hem de yapay zeka desteğiyle yemek tarifleri planlamalarını sağlayan kapsamlı ve modern bir web uygulamasıdır. Gelişmiş stok takibi ve AI entegrasyonu sayesinde mutfak deneyimini dijitalleştirirken gıda israfının da önüne geçmeyi hedefler.
 
 ## 🚀 Özellikler
 
-* **Yapay Zeka Destekli Tarifler:** Groq API entegrasyonu ile akıllı ve hızlı tarif üretimi.
-* **Dinamik ve Akıcı Kullanıcı Arayüzü:** Framer Motion kullanılarak hazırlanmış, göze hitap eden animasyonlar ve geçişler.
-* **Güvenilir Veritabanı Yönetimi:** Firebase altyapısı ile hızlı ve güvenli veri depolama/kullanıcı yönetimi.
-* **Canlı Yayın (Deployment):** Vercel üzerinden kesintisiz ve hızlı erişim.
+* **Gelişmiş Stok ve Envanter Takibi:** Mutfaktaki veya kilerdeki ürünlerinizi sisteme ekleyerek mevcut durumlarını ve miktarlarını detaylı bir şekilde kontrol edebilirsiniz.
+* **Akıllı Uyarı Sistemi:** Son kullanma tarihi yaklaşan ürünler ve tükenmekte olan stoklar için otomatik bildirimler alarak israfı önler ve eksikleri zamanında fark edersiniz.
+* **Yapay Zeka Destekli Tarifler:** Groq API entegrasyonu ile elinizdeki malzemelere uygun, pratik ve kişiselleştirilmiş tarif alternatifleri anında üretilir.
+* **Dinamik ve Akıcı Kullanıcı Arayüzü:** Framer Motion kullanılarak hazırlanmış, göze hitap eden animasyonlar ve pürüzsüz geçişler ile üst düzey kullanıcı deneyimi.
+* **Güvenilir Veritabanı Yönetimi:** Firebase altyapısı ile hızlı, güvenli veri depolama ve gerçek zamanlı senkronizasyon.
+* **Canlı Yayın (Deployment):** Vercel üzerinden kesintisiz, güvenli ve hızlı erişim.
 
 ## 🛠️ Kullanılan Teknolojiler
 
@@ -22,7 +24,7 @@ Projeyi kendi bilgisayarınızda (local) çalıştırmak için aşağıdaki adı
 
 1. **Projeyi Klonlayın:**
    ```bash
-   git clone https://github.com/sameddcicekk/PrepMaster.git
+   git clone [https://github.com/sameddcicekk/PrepMaster.git](https://github.com/sameddcicekk/PrepMaster.git)
    ```
 
 2. **Dizin İçine Girin:**
